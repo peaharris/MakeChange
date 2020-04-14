@@ -1,41 +1,49 @@
 ﻿using System;
 
-//Modify our Make Change program to include the following:
-//After the user has entered both the purchase amount and the payment amount. . .
-
-//If the payment amount is not enough to cover the purchase amount, print out an error message of your
-//choosing and don't calculate any change.
-
-//If the payment amount is exactly correct(the payment is exactly equal to the purchase), then print out
-//a message that indicates they gave exact change and don't calculate any change.
-
-//If the payment amount is more than the purchase amount, then go ahead and compute the change due and
-//how many of each denomination the customer should receive.
-
-//In the part of your code where you are computing and printing out how many of each denomination the
-//customer should receive, add some checks so that denominations that you don't need to give the customer
-//are not printed out at all. The old program would tell the user to give the customer 0 of that denomination.
-//When the customer should receive 0 of a denomination, let's just not print anything for that denomination.
-
 namespace MakeChange
 {
     class Program
     {
+        //Modify our Make Change program to include the following:
+
+        //When the user has entered the purchase price, use one of the iteration statements from this chapter in order to:
+        //Check to see if the purchase price is greater than zero.If it is not greater than zero,
+        //then loop and have the user re-enter the purchase price
+        //After the user has entered both the purchase amount and the payment amount, use one of the
+        //iteration statements from this chapter in order to:
+
+        //Check to see if the payment is enough.If it isn't enough, loop so that you ask for both
+        //the purchase price and the payment again. As long as the payment isn't enough, you should
+        //continue to loop and ask for the amounts again.When the payment is finally enough, you should
+        //compute and print out the change as before and end.
+        //Note: This will require some amount of finesse, a good understanding of loops, and some creative thinking.
+        //In order to get both parts done, it will probably require one loop (purchase price > 0)  to be inside of
+        //another loop (payment is enough). Also, only two loops are needed.If you have more than two loops in your
+        //solution, you might want to see if you can re-work your program to get it down to only two loops.
         public static void Main(string[] args)
-
         {
-            double purchaseAmount = GetAmount("Purchase Amount: ");
-            double paymentAmount = GetAmount("Payment Amount: ");
+            double purchaseAmount;
+            double paymentAmount;
 
-
-            if (purchaseAmount > paymentAmount)
+            do
             {
-                Console.WriteLine("Cough it up buckoo!");
-            }
-            else if (paymentAmount == purchaseAmount)
+                purchaseAmount = GetAmount("Purchase Amount: ");
+                paymentAmount = GetAmount("Payment Amount: ");
+
+                while ( purchaseAmount <= 0)
+                {
+                    Console.WriteLine("The Purchase Amount must be greater than zero.");
+                    purchaseAmount = GetAmount("Purchase Amount: ");
+                    paymentAmount = GetAmount("Payment Amount: ");
+                }
+
+            } while (purchaseAmount > paymentAmount);
+
+            if (paymentAmount == purchaseAmount)
             {
                 Console.WriteLine("My man!");
             }
+
             else
             {
                 double changeDue = ComputeChange(purchaseAmount, paymentAmount);
