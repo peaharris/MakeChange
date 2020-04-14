@@ -28,14 +28,14 @@ namespace MakeChange
             do
             {
                 purchaseAmount = GetAmount("Purchase Amount: ");
-                paymentAmount = GetAmount("Payment Amount: ");
-
+                
                 while ( purchaseAmount <= 0)
                 {
                     Console.WriteLine("The Purchase Amount must be greater than zero.");
                     purchaseAmount = GetAmount("Purchase Amount: ");
-                    paymentAmount = GetAmount("Payment Amount: ");
                 }
+
+                paymentAmount = GetAmount("Payment Amount: ");
 
             } while (purchaseAmount > paymentAmount);
 
