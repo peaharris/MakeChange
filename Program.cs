@@ -5,21 +5,17 @@ namespace MakeChange
     class Program
     {
         //Modify our Make Change program to include the following:
+        //Surround some of our code in a try-catch statement. Specifically, when we execute double.Parse()
+        //in order to convert the string value that the user entered for one of the amounts into a numeric
+        //value, that could throw an error(if we're sending non-numeric string data to double.Parse()). So
+        //we want to surround that in a try-catch.
+        //Again, there is some finesse required here. As long as the user keeps entering bad data, keep telling
+        //the user that the data is bad and re-asking them to enter it again. This sounds like a try-catch inside
+        //of a loop. One tricky part of putting a try-catch inside of a loop is paying attention to where variables
+        //are declared and where those variables are in-scope and where those variables are out-of-scope.
+        //Note: This kind of error checking (try-catch) might be cleverly combined with our previous error checking
+        //for amounts that aren't positive.
 
-        //When the user has entered the purchase price, use one of the iteration statements from this chapter in order to:
-        //Check to see if the purchase price is greater than zero.If it is not greater than zero,
-        //then loop and have the user re-enter the purchase price
-        //After the user has entered both the purchase amount and the payment amount, use one of the
-        //iteration statements from this chapter in order to:
-
-        //Check to see if the payment is enough.If it isn't enough, loop so that you ask for both
-        //the purchase price and the payment again. As long as the payment isn't enough, you should
-        //continue to loop and ask for the amounts again.When the payment is finally enough, you should
-        //compute and print out the change as before and end.
-        //Note: This will require some amount of finesse, a good understanding of loops, and some creative thinking.
-        //In order to get both parts done, it will probably require one loop (purchase price > 0)  to be inside of
-        //another loop (payment is enough). Also, only two loops are needed.If you have more than two loops in your
-        //solution, you might want to see if you can re-work your program to get it down to only two loops.
         public static void Main(string[] args)
         {
             double purchaseAmount;
@@ -76,8 +72,25 @@ namespace MakeChange
 
         static double GetAmount(string prompt)
         {
-            Console.Write(prompt);
-            double amount = double.Parse(Console.ReadLine());
+            double amount = -1.0;
+            while (amount <= 0) 
+            {
+                Console.Write(prompt);
+                try
+                {
+                    amount = double.Parse(Console.ReadLine());
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("That's not a number. Please enter a number: ");
+                    Console.WriteLine(fe.Message);
+                }
+                catch (OverflowException oe)
+                {
+                    Console.WriteLine("That number was too big (or too small)");
+                    Console.WriteLine(oe.Message);
+                }
+            } //End of While Loop
             return amount;
         }
 
