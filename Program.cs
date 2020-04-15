@@ -24,13 +24,6 @@ namespace MakeChange
             do
             {
                 purchaseAmount = GetAmount("Purchase Amount: ");
-                
-                while ( purchaseAmount <= 0)
-                {
-                    Console.WriteLine("The Purchase Amount must be greater than zero.");
-                    purchaseAmount = GetAmount("Purchase Amount: ");
-                }
-
                 paymentAmount = GetAmount("Payment Amount: ");
 
             } while (purchaseAmount > paymentAmount);
@@ -85,11 +78,7 @@ namespace MakeChange
                     Console.WriteLine("That's not a number. Please enter a number: ");
                     Console.WriteLine(fe.Message);
                 }
-                catch (OverflowException oe)
-                {
-                    Console.WriteLine("That number was too big (or too small)");
-                    Console.WriteLine(oe.Message);
-                }
+
             } //End of While Loop
             return amount;
         }
