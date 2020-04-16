@@ -39,6 +39,11 @@ namespace MakeChange
                 try
                 {
                     amount = double.Parse(Console.ReadLine());
+
+                    if (amount < 0)
+                    {
+                        Console.WriteLine("Please enter a POSITIVE number: ");
+                    }
                 }
                 catch (FormatException fe)
                 {
